@@ -14,9 +14,6 @@ BH1750 lightMeter(0x23);
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensores(&oneWire);
 
-//char temperature[] = "00 C";
-//char humidity[]    = "00%";
-
 float temperatura=0;
 void setup(){
 
@@ -35,23 +32,14 @@ void setup(){
 }
 
 void loop() {
-
-  // Read humidity
-  float temp=dht.readTemperature();
-  float hum=dht.readHumidity();
-//  byte RH = dht.readHumidity();
-//  //Read temperature in degree Celsius
-//  byte Temp = dht.readTemperature();
-//
-//  temperature[0] = Temp / 10 + 48;
-//  temperature[1] = Temp % 10 + 48;
-//  humidity[0]    = RH / 10 + 48;
-//  humidity[1]    = RH % 10 + 48;
+  
+  float temp=dht.readTemperature(); //Temperatura
+  float hum=dht.readHumidity(); //Humedad
 
   sensores.requestTemperatures(); //Prepara el sensor para la lectura
   temperatura= sensores.getTempCByIndex(0);
   
-  float lux = lightMeter.readLightLevel();
+  float lux = lightMeter.readLightLevel();  //Sensor de luz
 
   Serial.print("DS18B20: ");
   Serial.print(temperatura);
